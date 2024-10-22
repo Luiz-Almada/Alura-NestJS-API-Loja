@@ -1,10 +1,14 @@
 import { 
   Entity, 
-  Column 
+  Column, 
+  PrimaryGeneratedColumn
 } from 'typeorm';
 
 @Entity({ name: 'produto_imagens' })
 export class ImagemProduto {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+  
   @Column({ name: 'url', length: 100, nullable: false })
   url: string;
 

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsuarioModule } from 'src/usuario/usuario.module';
 import { ProdutoController } from './produto.controller';
-import { ProdutoRepository } from './produto.repository';
+import { ProdutoRepository } from './produtoxxxx.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProdutoEntity } from './produto.entity';
 import { ProdutoService } from './produto.service';

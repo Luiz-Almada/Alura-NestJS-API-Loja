@@ -6,7 +6,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { UsuarioRepository } from './../usuario.repository';
+import { UsuarioRepository } from '../usuarioxxxx.repository';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
@@ -32,7 +32,7 @@ export const EmailEhUnico = (opcoesDeValidacao: ValidationOptions) => {
       propertyName: propriedade,
       options: opcoesDeValidacao,
       constraints: [],
-      validator: EmailEhUnicoValidator
-    })
+      validator: EmailEhUnicoValidator,
+    });
   };
 };

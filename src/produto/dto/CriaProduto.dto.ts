@@ -11,25 +11,35 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
+import { ProdutoEntity } from '../produto.entity';
 
-// export class CaracteristicaProdutoDTO {
-//   @IsString()
-//   @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
-//   nome: string;
+export class CaracteristicaProdutoDTO {
+  id: string;
 
-//   @IsString()
-//   @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
-//   descricao: string;
-// }
+  @IsString()
+  @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
+  nome: string;
 
-// export class ImagemProdutoDTO {
-//  // @IsUrl({ message: 'URL para imagem inválida' })
-//   url: string;
+  @IsString()
+  @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
+  descricao: string;
 
-//   @IsString()
-//   @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
-//   descricao: string;
-// }
+  produto: ProdutoEntity;
+}
+
+export class ImagemProdutoDTO {
+
+  id: string;
+
+  @IsUrl(undefined, { message: 'URL para imagem inválida' })
+  url: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
+  descricao: string;
+
+  produto: ProdutoEntity;
+}
 
 export class CriaProdutoDTO {
   @IsUUID(undefined, { message: 'ID de usuário inválido' })
@@ -54,17 +64,17 @@ export class CriaProdutoDTO {
   })
   descricao: string;
 
-  // @ValidateNested()
-  // @IsArray()
-  // @ArrayMinSize(3)
-  // @Type(() => CaracteristicaProdutoDTO)
-  // caracteristicas: CaracteristicaProdutoDTO[];
+  @ValidateNested()
+  @IsArray()
+  @ArrayMinSize(3)
+  @Type(() => CaracteristicaProdutoDTO)
+  caracteristicas: CaracteristicaProdutoDTO[];
 
-  // @ValidateNested()
-  // @IsArray()
-  // @ArrayMinSize(1)
-  // @Type(() => ImagemProdutoDTO)
-  // imagens: ImagemProdutoDTO[];
+  @ValidateNested()
+  @IsArray()
+  @ArrayMinSize(1)
+  @Type(() => ImagemProdutoDTO)
+  imagens: ImagemProdutoDTO[];
 
   @IsString()
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })

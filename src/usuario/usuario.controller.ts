@@ -7,16 +7,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { AtualizaUsuarioDTO } from './dto/AtualizaUsuario.dto';
 import { CriaUsuarioDTO } from './dto/CriaUsuario.dto';
 import { ListaUsuarioDTO } from './dto/ListaUsuario.dto';
-import { AtualizaUsuarioDTO } from './dto/AtualizaUsuario.dto';
 import { UsuarioService } from './usuario.service';
 
 @Controller('/usuarios')
 export class UsuarioController {
-  constructor(
-    private usuarioService: UsuarioService,
-  ) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   @Post()
   async criaUsuario(@Body() dadosDoUsuario: CriaUsuarioDTO) {
@@ -27,26 +25,27 @@ export class UsuarioController {
       messagem: 'usuário criado com sucesso',
     };
   }
-  
 
   @Get()
-  async listaUsuarios() {
-    const usuariosSalvos = await this.usuarioService.listaUsuarios();
+  async listUsuarios() {
+    const usuariosSalvos = await this.usuarioService.listUsuarios();
+
     return usuariosSalvos;
   }
 
   @Put('/:id')
   async atualizaUsuario(
     @Param('id') id: string,
-    @Body() novoDados: AtualizaUsuarioDTO,
+    @Body() novosDados: AtualizaUsuarioDTO,
   ) {
     const usuarioAtualizado = await this.usuarioService.atualizaUsuario(
       id,
-      novoDados,
+      novosDados,
     );
+
     return {
       usuario: usuarioAtualizado,
-      message: 'Usuário atualizado com sucesso!',
+      messagem: 'usuário atualizado com sucesso',
     };
   }
 
@@ -56,7 +55,7 @@ export class UsuarioController {
 
     return {
       usuario: usuarioRemovido,
-      message: 'Usuário removido com sucesso!',
+      messagem: 'usuário removido com suceso',
     };
   }
 }

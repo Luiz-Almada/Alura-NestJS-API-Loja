@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { PedidoService } from './pedido.service';
 import { CriaPedidoDTO } from './dto/CriaPedidoDTO';
+import { AtualizaPedidoDTO } from './dto/AtualizaProdutoDTO';
 
 @Controller('pedidos')
 export class PedidoController {
@@ -32,6 +33,14 @@ export class PedidoController {
     const pedidos = await this.pedidoService.obtemPedidosDeUsuario(usuarioId);
 
     return pedidos;
+  }
+
+  @Patch(':id')
+  atualizaPedido(
+    @Param('id') pedidoId: string,
+    @Body() dadosDeAtualizacao: AtualizaPedidoDTO,
+  ) {
+    return this.pedidoService.atualizaPedido(pedidoId, dadosDeAtualizacao);
   }
 
   /*  @Post()

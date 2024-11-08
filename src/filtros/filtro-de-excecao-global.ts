@@ -41,6 +41,7 @@ export class FiltroDeExcecaoGlobal implements ExceptionFilter {
             },
           };
     //resposta.status(status).json(body);
+    //Muda a tecnologia Express para Fastfify
     httpAdapter.reply(resposta, body, status);
   }
 }

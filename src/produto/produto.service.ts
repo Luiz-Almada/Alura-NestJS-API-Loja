@@ -16,13 +16,14 @@ export class ProdutoService {
   async criaProduto(dadosProduto: CriaProdutoDTO) {
     const produtoEntity = new ProdutoEntity();
 
-    produtoEntity.nome = dadosProduto.nome;
-    produtoEntity.valor = dadosProduto.valor;
-    produtoEntity.quantidadeDisponivel = dadosProduto.quantidadeDisponivel;
-    produtoEntity.descricao = dadosProduto.descricao;
-    produtoEntity.categoria = dadosProduto.categoria;
-    produtoEntity.caracteristicas = dadosProduto.caracteristicas;
-    produtoEntity.imagens = dadosProduto.imagens;
+    // Aplica o Object.assign (map) para evitar repetição de código
+    // O Typescript não trata muito o Object.assign pois não detecta
+    // uma possível mudança de nome de propriedae (campo) na Entidade,
+    // ou seja, não detecta o erro.
+    // Para resolver essa "deficiência" pode ser utilizado um Cast:
+    // dadosProduto as ProdutoEntity para acusar o erro.
+
+    Object.assign(produtoEntity, dadosProduto as ProdutoEntity);
 
     return this.produtoRepository.save(produtoEntity);
   }
@@ -53,7 +54,7 @@ export class ProdutoService {
       throw new NotFoundException('O produto não foi encontrado');
     }
 
-    Object.assign(entityName, novosDados);
+    Object.assign(entityName, novosDados as ProdutoEntity);
 
     return this.produtoRepository.save(entityName);
   }

@@ -107,6 +107,12 @@ export class PedidoService {
   }
 
   async obtemPedidosDeUsuario(usuarioId: string) {
+    const usuario = await this.buscaUsuario(usuarioId);
+
+    if (usuario === null) {
+      throw new NotFoundException('O usuário não foi encontrado');
+    }
+
     return this.pedidoRepository.find({
       where: {
         usuario: { id: usuarioId },
@@ -116,18 +122,18 @@ export class PedidoService {
       },
     });
   }
+
   async atualizaPedido(id: string, dto: AtualizaPedidoDTO) {
     const pedido = await this.pedidoRepository.findOneBy({ id });
 
-    throw new Error('Simulando erro de banco de dados... ');
+    //throw new Error('Simulando erro de banco de dados... ');
 
-    /*     if (pedido === null) {
+    if (pedido === null) {
       throw new NotFoundException('O pedido não foi encontrado');
     }
 
-    Object.assign(pedido, dto);
+    Object.assign(pedido, dto as PedidoEntity);
 
     return this.pedidoRepository.save(pedido);
- */
   }
 }
